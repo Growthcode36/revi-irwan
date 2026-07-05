@@ -36,22 +36,22 @@
 
     if (!openBtn) return;
 
-openBtn.addEventListener('click', () => {
-  cover.style.display = 'none';   // paksa hilang total, tidak ikut alur halaman
-  main.removeAttribute('hidden');
-  nav.classList.add('is-visible');
-  window.scrollTo({ top: 0 });
+    openBtn.addEventListener('click', () => {
+      cover.style.display = 'none';   // paksa hilang total, tidak ikut alur halaman
+      main.removeAttribute('hidden');
+      nav.classList.add('is-visible');
+      window.scrollTo({ top: 0 });
 
-  if (music) {
-    music.volume = 0.6;
-    music.play().catch(() => {});
-    updateMusicIcon(true);
-  }
+      if (music) {
+        music.volume = 0.6;
+        music.play().catch(() => {});
+        updateMusicIcon(true);
+      }
 
-  // beri jeda sepersekian detik agar browser selesai
-  // menghapus cover sebelum auto-scroll mulai berjalan
-  setTimeout(() => AutoScroll.start(), 50);
-});
+      // beri jeda sepersekian detik agar browser selesai
+      // menghapus cover sebelum auto-scroll mulai berjalan
+      setTimeout(() => AutoScroll.start(), 50);
+    });
   }
 
   /* ---------- 4. MUSIC TOGGLE ---------- */
@@ -148,80 +148,8 @@ openBtn.addEventListener('click', () => {
     link.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   }
 
-/* ---------- 8. UCAPAN (Google Sheets via Apps Script) ---------- */
-const WISH_API_URL = 'https://script.google.com/macros/s/AKfycbwXIJa5FM6enupBls80xuGfH7K-5R8weckx2jbcCHK8IKUirmI-8DZ4ZeEDCCyGhFV8Og/exec';
-
-function escapeHTML(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-async function fetchWishes() {
-  try {
-    const res = await fetch(WISH_API_URL);
-    return await res.json();
-  } catch (e) {
-    return [];
-  }
-}
-
-async function postWish(name, message) {
-  await fetch(WISH_API_URL, {
-    method: 'POST',
-    body: JSON.stringify({ name, message })
-  });
-}
-
-async function renderWishes() {
-  const list = document.getElementById('wishList');
-  if (!list) return;
-
-  list.innerHTML = '<li class="wish-empty">Memuat ucapan…</li>';
-  const wishes = await fetchWishes();
-
-  if (wishes.length === 0) {
-    list.innerHTML = '<li class="wish-empty">Jadilah yang pertama mengirimkan ucapan &amp; doa.</li>';
-    return;
-  }
-
-  list.innerHTML = wishes
-    .map(
-      (w) => `
-      <li class="wish-item">
-        <p class="wish-item-name">${escapeHTML(w.name)}</p>
-        <p class="wish-item-message">${escapeHTML(w.message)}</p>
-      </li>`
-    )
-    .join('');
-}
-
-function initWishForm() {
-  const form = document.getElementById('wishForm');
-  if (!form) return;
-
-  renderWishes();
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const nameEl = document.getElementById('wishName');
-    const messageEl = document.getElementById('wishMessage');
-    const name = nameEl.value.trim();
-    const message = messageEl.value.trim();
-    if (!name || !message) return;
-
-    const btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Mengirim…';
-
-    await postWish(name, message);
-    await renderWishes();
-
-    form.reset();
-    btn.disabled = false;
-    btn.textContent = 'Kirim Ucapan';
-  });
-}
+  /* ---------- 8. UCAPAN (Google Sheets via Apps Script) ---------- */
+  const WISH_API_URL = 'https://script.google.com/macros/s/AKfycbwXIJa5FM6enupBls80xuGfH7K-5R8weckx2jbcCHK8IKUirmI-8DZ4ZeEDCCyGhFV8Og/exec';
 
   function escapeHTML(str) {
     const div = document.createElement('div');
@@ -229,10 +157,28 @@ function initWishForm() {
     return div.innerHTML;
   }
 
-  function renderWishes() {
+  async function fetchWishes() {
+    try {
+      const res = await fetch(WISH_API_URL);
+      return await res.json();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async function postWish(name, message) {
+    await fetch(WISH_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ name, message })
+    });
+  }
+
+  async function renderWishes() {
     const list = document.getElementById('wishList');
     if (!list) return;
-    const wishes = loadWishes();
+
+    list.innerHTML = '<li class="wish-empty">Memuat ucapan…</li>';
+    const wishes = await fetchWishes();
 
     if (wishes.length === 0) {
       list.innerHTML = '<li class="wish-empty">Jadilah yang pertama mengirimkan ucapan &amp; doa.</li>';
@@ -240,8 +186,6 @@ function initWishForm() {
     }
 
     list.innerHTML = wishes
-      .slice()
-      .reverse()
       .map(
         (w) => `
         <li class="wish-item">
@@ -258,17 +202,24 @@ function initWishForm() {
 
     renderWishes();
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('wishName').value.trim();
-      const message = document.getElementById('wishMessage').value.trim();
+      const nameEl = document.getElementById('wishName');
+      const messageEl = document.getElementById('wishMessage');
+      const name = nameEl.value.trim();
+      const message = messageEl.value.trim();
       if (!name || !message) return;
 
-      const wishes = loadWishes();
-      wishes.push({ name, message, date: new Date().toISOString() });
-      saveWishes(wishes);
-      renderWishes();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Mengirim…';
+
+      await postWish(name, message);
+      await renderWishes();
+
       form.reset();
+      btn.disabled = false;
+      btn.textContent = 'Kirim Ucapan';
     });
   }
 

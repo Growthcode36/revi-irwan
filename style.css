@@ -134,7 +134,7 @@ ul{ list-style:none; }
 
 .cover-eyebrow{
   position:absolute !important;
-  top:-50px;
+  top:-90px;
   left:50%;
   transform:translateX(-50%);
   letter-spacing:.35em;

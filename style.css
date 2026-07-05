@@ -167,7 +167,7 @@ ul{ list-style:none; }
 .reveal.is-visible{ opacity:1; transform:translateY(0); }
 
 /* Hero */
-.hero{ text-align:center; position:relative; padding-top:120px; }
+.hero{ text-align:center; position:relative; padding-top:56px; }
 .hero-ornament{
   position:absolute; top:12px; left:50%; transform:translateX(-50%);
   width:64px; height:64px; opacity:.5;

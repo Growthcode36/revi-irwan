@@ -144,7 +144,7 @@
   function initWhatsapp() {
     const link = document.getElementById('whatsappBtn');
     if (!link) return;
-    const phone = '6281234567890'; // dummy — ganti dengan nomor asli
+    const phone = '6281378378090'; // dummy — ganti dengan nomor asli
     const params = new URLSearchParams(window.location.search);
     const guest = params.get('to') ? decodeURIComponent(params.get('to').replace(/\+/g, ' ')) : '';
 

@@ -306,7 +306,7 @@ openBtn.addEventListener('click', () => {
 
     function step() {
       if (!active) return;
-      window.scrollBy(0, SPEED);
+      window.scrollBy({ top: SPEED, left: 0, behavior: 'auto' });
 
       const atBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;

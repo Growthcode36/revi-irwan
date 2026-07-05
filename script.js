@@ -37,7 +37,7 @@
     if (!openBtn) return;
 
 openBtn.addEventListener('click', () => {
-  cover.setAttribute('hidden', '');
+  cover.style.display = 'none';   // paksa hilang total, tidak ikut alur halaman
   main.removeAttribute('hidden');
   nav.classList.add('is-visible');
   window.scrollTo({ top: 0 });
@@ -48,7 +48,9 @@ openBtn.addEventListener('click', () => {
     updateMusicIcon(true);
   }
 
-  AutoScroll.start();
+  // beri jeda sepersekian detik agar browser selesai
+  // menghapus cover sebelum auto-scroll mulai berjalan
+  setTimeout(() => AutoScroll.start(), 50);
 });
   }
 

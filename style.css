@@ -4,7 +4,6 @@
    ========================================================= */
 
 :root{
-   [hidden]{ display:none !important; }
   /* -- palette -- */
   --bg-deep:      #0B0718;
   --bg-deep-2:    #170F2E;
@@ -30,7 +29,7 @@
   --max-w: 640px;
   --nav-h: 64px;
 }
-
+ [hidden]{ display:none !important; }
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
 

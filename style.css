@@ -4,6 +4,7 @@
    ========================================================= */
 
 :root{
+   [hidden]{ display:none !important; }
   /* -- palette -- */
   --bg-deep:      #0B0718;
   --bg-deep-2:    #170F2E;

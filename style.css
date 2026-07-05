@@ -208,12 +208,19 @@ ul{ list-style:none; }
 
 /* Countdown */
 .countdown-section{ text-align:center; }
-.countdown{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+.countdown{ display:flex; justify-content:center; gap:8px; flex-wrap:nowrap; }
 .countdown-item{
-  width:76px; padding:16px 0; border-radius:var(--radius-sm);
+  flex:1 1 0;
+  max-width:76px;
+  padding:12px 0;
+  border-radius:var(--radius-sm);
   background:var(--glass); border:1px solid var(--glass-border); backdrop-filter:blur(14px);
 }
-.countdown-item span{ display:block; font-family:var(--font-display); font-size:1.6rem; color:var(--cyan); text-shadow:0 0 12px rgba(35,232,214,.5); }
+.countdown-item span{
+  display:block; font-family:var(--font-display);
+  font-size:clamp(1.05rem, 5vw, 1.6rem);
+  color:var(--cyan); text-shadow:0 0 12px rgba(35,232,214,.5);
+}
 .countdown-item small{ font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ivory-dim); }
 
 /* Events */

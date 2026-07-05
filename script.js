@@ -36,29 +36,20 @@
 
     if (!openBtn) return;
 
-    openBtn.addEventListener('click', () => {
-      cover.style.transition = 'opacity .6s ease, transform .6s ease';
-      cover.style.opacity = '0';
-      cover.style.transform = 'scale(1.02)';
+openBtn.addEventListener('click', () => {
+  cover.setAttribute('hidden', '');
+  main.removeAttribute('hidden');
+  nav.classList.add('is-visible');
+  window.scrollTo({ top: 0 });
 
-      setTimeout(() => {
-        cover.setAttribute('hidden', '');
-        main.removeAttribute('hidden');
-        nav.classList.add('is-visible');
-        window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  if (music) {
+    music.volume = 0.6;
+    music.play().catch(() => {});
+    updateMusicIcon(true);
+  }
 
-        // try to start music (best effort, browsers may still block)
-        if (music) {
-          music.volume = 0.6;
-          music.play().catch(() => {
-            /* autoplay blocked — user can use the floating toggle */
-          });
-          updateMusicIcon(true);
-        }
-
-        AutoScroll.start();
-      }, 550);
-    });
+  AutoScroll.start();
+});
   }
 
   /* ---------- 4. MUSIC TOGGLE ---------- */

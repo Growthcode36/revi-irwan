@@ -132,7 +132,16 @@ ul{ list-style:none; }
 .cover-ornament--bottom{ bottom:-18%; right:-10%; background:radial-gradient(closest-side, rgba(35,232,214,.30), transparent 70%); }
 
 .cover-content{ position:relative; z-index:2; max-width:480px; }
-.cover-eyebrow{ letter-spacing:.35em; text-transform:uppercase; font-size:1rem; color:var(--gold); margin-bottom:18px; margin-top:-70px; }
+.cover-eyebrow{
+  position:absolute;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  font-size:1rem;
+  color:var(--gold);
+}
 .cover-names{
   font-family:var(--font-script); font-weight:400;
   font-size:clamp(3rem, 12vw, 5.2rem); line-height:1.1;

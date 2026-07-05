@@ -302,7 +302,7 @@ openBtn.addEventListener('click', () => {
   const AutoScroll = (function () {
     let rafId = null;
     let active = false;
-    const SPEED = 0.55; // px per frame — kecepatan scroll otomatis, sesuaikan jika perlu
+    const SPEED = 1.1; // px per frame — kecepatan scroll otomatis, sesuaikan jika perlu
 
     function step() {
       if (!active) return;

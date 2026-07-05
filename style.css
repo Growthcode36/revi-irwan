@@ -132,7 +132,7 @@ ul{ list-style:none; }
 .cover-ornament--bottom{ bottom:-18%; right:-10%; background:radial-gradient(closest-side, rgba(35,232,214,.30), transparent 70%); }
 
 .cover-content{ position:relative; z-index:2; max-width:480px; }
-.cover-eyebrow{ letter-spacing:.35em; text-transform:uppercase; font-size:.72rem; color:var(--gold); margin-bottom:18px; margin-top:-12px; }
+.cover-eyebrow{ letter-spacing:.35em; text-transform:uppercase; font-size:1rem; color:var(--gold); margin-bottom:18px; margin-top:-70px; }
 .cover-names{
   font-family:var(--font-script); font-weight:400;
   font-size:clamp(3rem, 12vw, 5.2rem); line-height:1.1;
@@ -151,7 +151,6 @@ ul{ list-style:none; }
   color:var(--bg-deep); font-weight:600; letter-spacing:.03em; font-size:.9rem;
   box-shadow:0 10px 30px rgba(161,107,255,.35);
   transition:transform .25s ease, box-shadow .25s ease;
-  margin-top:12px;
 }
 .btn-open:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(35,232,214,.4); }
 .btn-open svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; animation:bob 1.6s ease-in-out infinite; }

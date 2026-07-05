@@ -134,12 +134,12 @@ ul{ list-style:none; }
 
 .cover-eyebrow{
   position:absolute !important;
-  top:-90px;
+  top:-170px;
   left:50%;
   transform:translateX(-50%);
   letter-spacing:.35em;
   text-transform:uppercase;
-  font-size:1.15rem;
+  font-size:1.01rem;
   color:var(--gold);
   white-space:nowrap;
   margin:0;
